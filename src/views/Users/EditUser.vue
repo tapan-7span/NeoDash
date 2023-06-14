@@ -1,6 +1,6 @@
 <template>
     <div>
-        Users
+        Add User
     </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        NavBar
+        Users List
     </div>
 </template>
 <script>

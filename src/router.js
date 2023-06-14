@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from './views/Home.vue';
 import NotFound from './views/404.vue';
+import Login from './views/Login.vue';
+import Info from './views/info.vue';
 
 const routes = [
   {
@@ -8,16 +10,16 @@ const routes = [
     name: 'home',
     component: Home,
   },
-//   {
-//     path: '/dashboard',
-//     name: 'dashboard',
-//     component: Dashboard,
-//   },
-//   {
-//     path: '/about',
-//     name: 'about',
-//     component: About,
-//   },
+  {
+    path: '/info',
+    name: 'Info',
+    component: Info,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  },
   {
     path: '/:catchAll(.*)',
     name: 'not-found',
