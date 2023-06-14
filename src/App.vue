@@ -1,9 +1,15 @@
-<template lang="">
+<template>
   <div>
-    <h1 className="text-3xl font-bold text-red-800 underline">Hello world!</h1>
+    <Navbar />
+    <router-view />
   </div>
 </template>
+
 <script>
-export default {};
+import Navbar from "./components/Navbar.vue";
+
+export default {
+  name: "App",
+  components: { Navbar },
+};
 </script>
-<style lang=""></style>
