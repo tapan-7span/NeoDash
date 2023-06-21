@@ -3,36 +3,42 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
       <div class="flex flex-wrap items-center justify-between mx-auto p-4">
         <div class="flex items-center">
-          <img src="@/assets/logo.png" class="h-8 mr-3" alt="Neo Logo" />
-          <span
+          <!-- <img src="@/assets/logo.png" class="h-8 mr-3" alt="Neo Logo" /> -->
+          <!-- <span
             class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
             >Neo Dash</span
-          >
+          > -->
         </div>
         <div class="flex md:order-2">
+          <router-link to="/admin-dashboard">
+            <button
+              type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12 23C6.443 21.765 2 16.522 2 11V5l10-4l10 4v6c0 5.524-4.443 10.765-10 12ZM4 6v5a10.58 10.58 0 0 0 8 10a10.58 10.58 0 0 0 8-10V6l-8-3Z"
+                />
+                <circle cx="12" cy="8.5" r="2.5" fill="currentColor" />
+                <path
+                  fill="currentColor"
+                  d="M7 15a5.782 5.782 0 0 0 5 3a5.782 5.782 0 0 0 5-3c-.025-1.896-3.342-3-5-3c-1.667 0-4.975 1.104-5 3Z"
+                />
+              </svg>
+            </button>
+          </router-link>
+          <!-- Dark Light Theme -->
           <button
             type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M12 23C6.443 21.765 2 16.522 2 11V5l10-4l10 4v6c0 5.524-4.443 10.765-10 12ZM4 6v5a10.58 10.58 0 0 0 8 10a10.58 10.58 0 0 0 8-10V6l-8-3Z"
-              />
-              <circle cx="12" cy="8.5" r="2.5" fill="currentColor" />
-              <path
-                fill="currentColor"
-                d="M7 15a5.782 5.782 0 0 0 5 3a5.782 5.782 0 0 0 5-3c-.025-1.896-3.342-3-5-3c-1.667 0-4.975 1.104-5 3Z"
-              />
-              Admin
-            </svg>
-            
-          </button>
+            @click="toggleTheme()"
+            class="text-white hover:bg-blue-800 ml-2 focus:ring-4 focus:outline-none focus:ring-gray-900 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-gray-600 dark:hover:bg-gray-400 dark:focus:ring-gray-800"
+          ></button>
           <button
             data-collapse-toggle="navbar-cta"
             type="button"
@@ -66,7 +72,7 @@
             <router-link
               to="/"
               exact
-              class="text-gray-500 hover:text-blue-500 font-medium py-2 px-4 rounded"
+              class="text-white hover:text-blue-500 font-medium py-2 px-4 rounded"
               :class="{
                 'underline underline-offset-4 decoration-blue-500 text-white':
                   $route.path === '/',
@@ -75,44 +81,74 @@
               Home
             </router-link>
             <router-link
-              to="/"
+              to="/users"
               exact
-              class="text-gray-500 hover:text-blue-500 font-medium py-2 px-4 rounded"
+              class="text-white hover:text-blue-500 font-medium py-2 px-4 rounded"
               :class="{
                 'underline underline-offset-4 decoration-blue-500 text-white':
-                  $route.path === '/',
+                  $route.path === '/users',
               }"
             >
               Users
             </router-link>
             <router-link
-              to="/"
+              to="/tasks"
               exact
-              class="text-gray-500 hover:text-blue-500 font-medium py-2 px-4 rounded"
+              class="text-white hover:text-blue-500 font-medium py-2 px-4 rounded"
               :class="{
                 'underline underline-offset-4 decoration-blue-500 text-white':
-                  $route.path === '/',
+                  $route.path === '/tasks',
               }"
             >
               Tasks
             </router-link>
-            <router-link
-              to="/"
-              exact
-              class="text-gray-500 hover:text-blue-500 font-medium py-2 px-4 rounded"
-              :class="{
-                'underline underline-offset-4 decoration-blue-500 text-white':
-                  $route.path === '/',
-              }"
-            >
-              How It Works ?
-            </router-link>
+            <!-- Dropdown -->
+            <div class="relative">
+              <button
+                id="dropdownDefaultButton"
+                data-dropdown-toggle="dropdown"
+                @click="toggleDropdown"
+                type="button"
+                class="text-white hover:underline hover:underline-offset-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+              >
+                More
+                <svg
+                  class="w-4 h-4 ml-2"
+                  :class="dropdownOpen ? 'transform rotate-180' : ''"
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
+                </svg>
+              </button>
+            </div>
           </ul>
         </div>
+        
       </div>
     </nav>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      dropdownOpen: false,
+    };
+  },
+  methods: {
+    toggleDropdown() {
+      this.dropdownOpen = !this.dropdownOpen;
+    },
+  },
+};
 </script>
+<style scoped></style>

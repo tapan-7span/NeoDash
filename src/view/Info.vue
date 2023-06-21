@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center py-8">
     How It Works ? 
   </div>
 </template>
@@ -8,4 +8,5 @@
 export default {
   name: 'Info',
 };
+
 </script>

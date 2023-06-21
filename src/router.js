@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from './views/Home.vue';
-import NotFound from './views/404.vue';
-import Login from './views/Login.vue';
-import Info from './views/info.vue';
+import Home from '@/view/Home.vue';
+import NotFound from '@/view/404.vue';
+import Login from '@/view/Login.vue';
+import Info from '@/view/info.vue';
+import Users from '@/view/Users.vue';
+import Tasks from '@/view/Tasks.vue';
 
 const routes = [
   {
@@ -11,9 +13,19 @@ const routes = [
     component: Home,
   },
   {
+    path: '/users',
+    name: 'Users',
+    component: Users,
+  },
+  {
     path: '/info',
     name: 'Info',
     component: Info,
+  },
+  {
+    path: '/tasks',
+    name: 'Tasks',
+    component: Tasks,
   },
   {
     path: '/login',
