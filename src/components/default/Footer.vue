@@ -1,10 +1,11 @@
 <template>
+  <div class="border border-white">Version {{ ProjectVersion }}</div>
   <div
     class="bg-white border-gray-200 dark:bg-gray-900 p-6 flex items-end justify-center"
   >
     <span class="dark:text-white flex text-md items-baseline">Powred BY</span>
     <div>
-      <svg
+      <!-- <svg
         width="180"
         height="50"
         viewBox="0 0 223 73"
@@ -59,10 +60,18 @@
           d="M220.926 39.9758C220.168 38.6147 219.123 37.5567 217.785 36.8016C216.451 36.0465 214.913 35.6689 213.175 35.6689C211.587 35.6689 210.131 35.9695 208.811 36.5683C207.488 37.1671 206.4 37.9414 205.538 38.8865V36.3783H198.681V59.1006H205.538V45.6534C205.538 44.766 205.738 43.9701 206.139 43.2679C206.54 42.5657 207.105 42.0102 207.831 41.6038C208.558 41.1974 209.427 40.993 210.436 40.993C211.92 40.993 213.088 41.4475 213.943 42.3589C214.797 43.2679 215.222 44.5376 215.222 46.1632V59.0982H222.058V44.7203C222.058 42.9168 221.679 41.3321 220.921 39.971L220.926 39.9758Z"
           fill="white"
         />
-      </svg>
+      </svg> -->
     </div>
   </div>
 </template>
 <script>
-export default {};
+import PackageJson from "../../../package.json";
+export default {
+  methods: {
+    GetVersion() {
+      const ProjectVersion = this.PackageJson.version;
+      return ProjectVersion;
+    },
+  },
+};
 </script>
