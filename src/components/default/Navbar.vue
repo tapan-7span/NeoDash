@@ -9,7 +9,7 @@
             >Neo Dash</span
           > -->
         </div>
-        <div class="flex md:order-2">
+        <div class="flex md:order-2 gap-2">
           <router-link to="/admin-dashboard">
             <button
               type="button"
@@ -33,6 +33,24 @@
               </svg>
             </button>
           </router-link>
+          <button
+            @click="logout()"
+            type="button"
+            v-if="NToken"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M14.08 15.59L16.67 13H7v-2h9.67l-2.59-2.59L15.5 7l5 5l-5 5l-1.42-1.41M19 3a2 2 0 0 1 2 2v4.67l-2-2V5H5v14h14v-2.67l2-2V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h14Z"
+              />
+            </svg>
+          </button>
         </div>
         <div
           class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
@@ -92,11 +110,32 @@
   </div>
 </template>
 <script>
+import AuthService from "@/Utilities/AuthService.js";
+import notification from "@/Utilities/notification.js";
+
 export default {
   data() {
-    return {};
+    return {
+      NToken: null,
+    };
   },
-  methods: {},
+  mixins: [notification],
+  updated() {
+    this.NToken = AuthService.isAuthenticated();
+  },
+  methods: {
+    logout() {
+      const res = AuthService.logout();
+      if (res) {
+        this.successToast("Logged Out !");
+        setTimeout(() => {
+          this.$router.push({ name: "Login" });
+        }, 1000);
+      } else {
+        this.errorToast("Something Went Wrong !");
+      }
+    },
+  },
 };
 </script>
 <style scoped></style>

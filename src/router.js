@@ -1,3 +1,4 @@
+import AuthService from "@/Utilities/AuthService.js";
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/view/Home.vue";
 import Error from "@/view/Error.vue";
@@ -10,9 +11,12 @@ import UsersList from "@/view/Users/UserList.vue";
 import addUser from "@/view/Users/AddUser.vue";
 import editUser from "@/view/Users/EditUser.vue";
 import deletedUsers from "@/view/Users/DeletedUsers.vue";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const routes = [
-  { path: "/", name: "home", component: Home },
+  { path: "/", name: "Home", component: Home },
   {
     path: "/users",
     name: "Users",
@@ -46,8 +50,24 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (1) {
-    next();
+  const validated = AuthService.isAuthenticated();
+  const versionCheck = AuthService.checkNewVersion();
+  if (versionCheck.res) {
+    if (validated) {
+      next(); // Proceed with the navigation
+    } else if (to.name === "Login") {
+      next(); // Allow navigation to the login page
+    } else {
+      next({ name: "Login" }); // Redirect to the login page
+    }
+  } else {
+    toast.warning("New Version" + versionCheck.version + " Available");
+    setTimeout(() => {
+      toast.info("Updating Version !");
+      setTimeout(() => {
+        window.location.reload();
+      }, 5000);
+    }, 1500);
   }
 });
 

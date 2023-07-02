@@ -53,7 +53,6 @@ export default {
   methods: {
     verify() {
       const datapassing = this.OTP;
-      console.log("Verifying...." + datapassing);
       this.$emit("verifyOtp", datapassing);
     },
     cancel() {
