@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-white">Version {{ ProjectVersion }}</div>
+  
   <div
     class="bg-white border-gray-200 dark:bg-gray-900 p-6 flex items-end justify-center"
   >
@@ -65,13 +65,5 @@
   </div>
 </template>
 <script>
-import PackageJson from "../../../package.json";
-export default {
-  methods: {
-    GetVersion() {
-      const ProjectVersion = this.PackageJson.version;
-      return ProjectVersion;
-    },
-  },
-};
+
 </script>
