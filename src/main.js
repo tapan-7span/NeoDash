@@ -5,19 +5,17 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import "./style.css";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import { register as registerGlobal } from "./global";
+
 const pinia = createPinia();
-// Component Imports
-import submitBtn from "@/components/Button/submitBtn.vue";
-import headerBtn from "@/components/Button/headerBtn.vue";
-import logoutBtn from "@/components/Button/logoutBtn.vue";
+pinia.use(piniaPluginPersistedstate);
 
 const app = createApp(App);
 app.config.productionTip = false;
 
-// Global Button Components
-app.component("headerBtn", headerBtn);
-app.component("submitBtn", submitBtn);
-app.component("logoutBtn", logoutBtn);
+// Global Register Components
+registerGlobal(app);
 
 app.use(Toast, {
   transition: "Vue-Toastification__fade",

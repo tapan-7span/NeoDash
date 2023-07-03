@@ -7,6 +7,7 @@ export const useAuthStore = defineStore({
       LoggedIn: false,
     };
   },
+  persist: true,
   getters: {
     isLoggedIn(state) {
       return state.LoggedIn;

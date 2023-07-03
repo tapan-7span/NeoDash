@@ -31,10 +31,8 @@ class AuthService {
   isAuthenticated() {
     const response = this.checkToken();
     if (response) {
-      console.log("t");
       return true;
     } else {
-      console.log("f");
       return false;
     }
   }

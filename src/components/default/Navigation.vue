@@ -92,6 +92,9 @@ export default {
       }
     },
   },
+  created() {
+    this.updateNavbar();
+  },
 
   mixins: [notification],
   methods: {
