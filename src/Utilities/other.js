@@ -8,7 +8,6 @@ export const generateRandomString = (number) => {
     result += characters.charAt(randomIndex);
   }
 
-  // console.log(result);
   return result;
 };
 

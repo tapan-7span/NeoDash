@@ -1,7 +1,7 @@
 <!-- LoginPage.vue -->
 
 <template>
-  <div class="m-44">
+  <div class="m-44 h-screen">
     <h1 class="text-2xl font-bold mb-4">Login</h1>
     <form @submit="handleLogin" class="flex flex-col space-y-4">
       <div class="flex flex-wrap justify-between">
@@ -18,12 +18,7 @@
           inputmode="numeric"
         />
       </div>
-      <button
-        type="submit"
-        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        Login
-      </button>
+      <submitBtn label="Submit" class="" :isLoading="isLoading" />
     </form>
   </div>
 </template>
@@ -31,11 +26,13 @@
 <script>
 import notification from "@/Utilities/notification.js";
 import AuthService from "@/Utilities/AuthService.js";
+import { useAuthStore } from "@/store";
 export default {
   name: "Login",
   data() {
     return {
       otp: ["", "", "", ""],
+      isLoading: false,
     };
   },
   mixins: [notification],
@@ -57,25 +54,31 @@ export default {
   methods: {
     handleLogin(event) {
       event.preventDefault();
-
+      this.isLoading = true;
       const otpData = this.otp.join("");
-
-      if (otpData.length === 4) {
-        const VerificationRes = AuthService.login(parseInt(otpData));
-        if (VerificationRes) {
-          this.successToast("Pin Verified !");
-          this.emptyField();
-          setTimeout(() => {
-            this.$router.push({ name: "Home" });
-          }, 1500);
+      setTimeout(() => {
+        if (otpData.length === 4) {
+          const VerificationRes = AuthService.login(parseInt(otpData));
+          if (VerificationRes) {
+            this.successToast("Pin Verified !");
+            this.emptyField();
+            setTimeout(() => {
+              this.isLoading = false;
+              const authStore = useAuthStore();
+              authStore.setLoggedIn(true);
+              this.$router.push({ name: "Home" });
+            }, 1500);
+          } else {
+            this.errorToast("Wrong PIN ");
+            this.emptyField();
+            this.isLoading = false;
+          }
         } else {
-          this.errorToast("Wrong PIN ");
+          this.isLoading = false;
+          this.errorToast("Please enter a 4-digit PIN");
           this.emptyField();
         }
-      } else {
-        this.errorToast("Please enter a 4-digit PIN");
-        this.emptyField();
-      }
+      }, 1000);
     },
     handleDigitInput(index) {
       if (this.otp[index] && index < this.otp.length - 1) {
