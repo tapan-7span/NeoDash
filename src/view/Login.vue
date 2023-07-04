@@ -9,7 +9,7 @@
           v-for="(digit, index) in otpDigits"
           :key="index"
           :ref="'otpInput' + index"
-          type="text"
+          type="password"
           v-model="otp[index]"
           @input="handleDigitInput(index)"
           class="w-12 h-12 border border-gray-300 rounded-md px-4 py-2 text-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500"

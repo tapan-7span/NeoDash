@@ -5,13 +5,18 @@ import Error from "@/view/Error.vue";
 import Login from "@/view/Login.vue";
 import Tasks from "@/view/Tasks.vue";
 import SiteInfo from "@/view/SiteInfo.vue";
-import Dashboard from "@/view/Admin/Dashboard.vue";
 import Users from "@/view/Users/Users.vue";
 import UsersList from "@/view/Users/UserList.vue";
 import addUser from "@/view/Users/AddUser.vue";
 import editUser from "@/view/Users/EditUser.vue";
 import deletedUsers from "@/view/Users/DeletedUsers.vue";
 import { useToast } from "vue-toastification";
+
+// Admin Routers
+import Dashboard from "@/view/Admin/Dashboard.vue";
+import Statistics from "@/view/Admin/Statistics.vue";
+import ActivityLog from "@/view/Admin/ActivityLog.vue";
+import ManageFeedback from "@/view/Admin/ManageFeedback.vue";
 
 const toast = useToast();
 
@@ -36,7 +41,11 @@ const routes = [
     path: "/admin-dashboard",
     name: "Dashboard",
     component: Dashboard,
-    meta: { requiresAuth: true },
+    children: [
+      { path: "", name: "Statistics", component: Statistics },
+      { path: "/activity", name: "ActivityLog", component: ActivityLog },
+      { path: "/manage-feedback", name: "ManageFeedback", component: ManageFeedback },
+    ],
   },
   { path: "/:catchAll(.*)", name: "Error", component: Error },
 ];
