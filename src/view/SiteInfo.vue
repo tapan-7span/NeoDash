@@ -1,7 +1,10 @@
 <template>
-  <div class="py-8 ">
-    <div class="text-lg border-white text-center">
+  <div class="py-8">
+    <div class="py-6 text-lg border-white text-center">
       Current Project Version : {{ ProjectVersion }}
+    </div>
+    <div>
+      <button @click="giveFeedback()">Give Feedback</button>
     </div>
   </div>
 </template>
@@ -16,6 +19,11 @@ export default {
   },
   created() {
     this.ProjectVersion = PackageJson.version;
+  },
+  methods: {
+    giveFeedback() {
+      this.$router.push({name:'/feedback'})
+    },
   },
 };
 </script>
