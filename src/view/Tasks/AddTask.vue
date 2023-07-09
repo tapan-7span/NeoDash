@@ -30,12 +30,21 @@
           />
         </div>
         <div class="mb-4">
-          <label class="block text-gray-900" for="uid">UID</label>
+          <label class="block text-gray-900" for="uid">TaskID</label>
           <input
             class="w-full bg-white border-gray-300 border p-2 rounded-md"
             type="text"
-            id="uid"
-            v-model="uid"
+            id="taskid"
+            v-model="taskid"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-900" for="uid">TaskTitle</label>
+          <input
+            class="w-full bg-white border-gray-300 border p-2 rounded-md"
+            type="text"
+            id="tasktitlt"
+            v-model="tasktitle"
           />
         </div>
 
@@ -51,13 +60,15 @@
 
 <script>
 export default {
-  name: "addUser",
+  name: "addTask",
   data() {
     return {
       number: "", // Add the "number" property
       name: "", // Add the "name" property
       avatar: "", // Add the "avatar" property
       uid: "", // Add the "uid" property
+      taskid: "", // Add the "taskid" property
+      tasktitle: "", // Add the "tasktitle" property
     };
   },
   mounted() {},

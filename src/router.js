@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/view/Home.vue";
 import Error from "@/view/Error.vue";
 import Login from "@/view/Login.vue";
-import Tasks from "@/view/Tasks.vue";
 import SiteInfo from "@/view/SiteInfo.vue";
 import Users from "@/view/Users/Users.vue";
 import UsersList from "@/view/Users/UserList.vue";
@@ -11,6 +10,13 @@ import addUser from "@/view/Users/AddUser.vue";
 import editUser from "@/view/Users/EditUser.vue";
 import deletedUsers from "@/view/Users/DeletedUsers.vue";
 import { useToast } from "vue-toastification";
+
+// Tasks
+import Tasks from "@/view/Tasks/Tasks.vue";
+import TaskList from "@/view/Tasks/TaskList.vue";
+import addTask from "@/view/Tasks/AddTask.vue";
+import editTask from "@/view/Tasks/EditTask.vue";
+import deletedTasks from "@/view/Tasks/DeletedTasks.vue";
 
 // Admin Routers
 import Dashboard from "@/view/Admin/Dashboard.vue";
@@ -34,7 +40,18 @@ const routes = [
     ],
     meta: { requiresAuth: true },
   },
-  { path: "/tasks", name: "Tasks", component: Tasks },
+  {
+    path: "/tasks",
+    name: "Tasks",
+    component: Tasks,
+    children: [
+      { path: "", name: "taskList", component: TaskList },
+      { path: "add-task", name: "addtask", component: addTask },
+      { path: "edit-task/:id", name: "editTask", component: editTask },
+      { path: "delete-task", name: "deletedTasks", component: deletedTasks },
+    ],
+    meta: { requiresAuth: true },
+  },
   { path: "/Login", name: "Login", component: Login },
   { path: "/info", name: "SiteInfo", component: SiteInfo },
   {
@@ -44,7 +61,11 @@ const routes = [
     children: [
       { path: "", name: "Statistics", component: Statistics },
       { path: "/activity", name: "ActivityLog", component: ActivityLog },
-      { path: "/manage-feedback", name: "ManageFeedback", component: ManageFeedback },
+      {
+        path: "/manage-feedback",
+        name: "ManageFeedback",
+        component: ManageFeedback,
+      },
     ],
   },
   { path: "/:catchAll(.*)", name: "Error", component: Error },

@@ -7,7 +7,8 @@
             <th class="py-2 px-4 border border-gray-200">Number</th>
             <th class="py-2 px-4 border border-gray-200">Name</th>
             <th class="py-2 px-4 border border-gray-200">Avatar</th>
-            <th class="py-2 px-4 border border-gray-200">UID</th>
+            <th class="py-2 px-4 border border-gray-200">TaskID</th>
+            <th class="py-2 px-4 border border-gray-200">TaskTitle</th>
             <th class="py-2 px-4 border border-gray-200"></th>
           </tr>
         </thead>
@@ -16,7 +17,10 @@
             <td class="py-2 px-4 border border-gray-200">{{ item.number }}</td>
             <td class="py-2 px-4 border border-gray-200">{{ item.name }}</td>
             <td class="py-2 px-4 border border-gray-200">{{ item.avatar }}</td>
-            <td class="py-2 px-4 border border-gray-200">{{ item.uid }}</td>
+            <td class="py-2 px-4 border border-gray-200">{{ item.taskid }}</td>
+            <td class="py-2 px-4 border border-gray-200">
+              {{ item.tasktitle }}
+            </td>
             <td class="py-2 px-4 border border-gray-500">
               <button @click="editItem(item)">
                 <svg
@@ -64,14 +68,28 @@
 
 <script>
 export default {
-  name: "UsersList",
+  name: "TaskList",
   mounted() {},
   methods: {},
   data() {
     return {
       items: [
-        { number: 1, avatar: "avatar1.png", uid: "UID1", name: "John Doe" },
-        { number: 2, avatar: "avatar2.png", uid: "UID2", name: "Jane Smith" },
+        {
+          number: 1,
+          avatar: "avatar1.png",
+          uid: "UID1",
+          name: "John Doe",
+          taskid: "1",
+          tasktitle: "Create a project",
+        },
+        {
+          number: 2,
+          avatar: "avatar2.png",
+          uid: "UID2",
+          name: "Jane Smith",
+          taskid: "2",
+          tasktitle: "Hello World",
+        },
         // Add more data items as needed
       ],
     };
